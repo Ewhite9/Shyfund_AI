@@ -33,12 +33,13 @@ def evaluate_model(model, X_val, y_val):
 
 # Step 6: Pattern Identification and Prediction
 def predict_sma(model, latest_prices):
-    next_sma = model.predict([latest_prices])[0]
+    #next_sma = model.predict(latest_prices.flatten().reshape(1, -1))[0]
+    next_sma = model.predict([[price] for price in latest_prices[0]])[0]
     return next_sma
 
 # Example Usage:
 api_key = 'NGQKTSLQAF79PJFV'
-symbol = 'IMB'
+symbol = 'IBM'
 
 # Step 1: JSON Data Collection
 data = fetch_stock_data(symbol, api_key)
